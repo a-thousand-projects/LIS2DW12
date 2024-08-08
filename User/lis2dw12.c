@@ -9,9 +9,6 @@
 #include "lis2dw12.h"
 
 
-
-
-
 // Init LIS2D
 void init_lis2dw12()
 {
@@ -46,6 +43,16 @@ void init_lis2dw12()
 
     I2C_Cmd(I2C1, ENABLE);
     I2C_AcknowledgeConfig(I2C1, ENABLE);
+
+
+    /*-----------------------------------------------------------
+     * Init Chip
+     ------------------------------------------------------------*/
+
+    uint8_t whoami = lis2_read(LIS2_REG_WHO_AM_I);
+
+    printf("Init LIS2DW - Who Am I Responce = 0x%x\n\r",whoami);
+
 
 }
 

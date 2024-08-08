@@ -21,9 +21,9 @@
  *                     PD6 -- Tx
  *
  */
-
+#include "main.h"
 #include "debug.h"
-
+#include "lis2dw12.h"
 
 /* Global define */
 
@@ -86,6 +86,46 @@ int main(void)
     printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 
     USARTx_CFG();
+
+    // configures GPIOC pin 4 as Output Push/Pull for data out
+   Delay_Ms(5);
+   init_lis2dw12();
+
+   // Set up CTRL 1
+   uint8_t ctrl1 = (LIS2_CTRL1_ODR_400_HZ << LIS2_CTRL1_ODR_POS) | (LIS2_CTRL1_MODE_HIGH_PER << LIS2_CTRL1_MODE_POS) | (LIS2_CTRL1_LP_MODE_1 << LIS2_CTRL1_LP_MODE_POS);
+   lis2d_write(LIS2_REG_CTRL1,ctrl1 );
+
+   while (lis2_read(LIS2_REG_STATUS)  & LIS2_STATUS_DRDY != LIS2_STATUS_DRDY);
+
+   uint8_t temp = 0;
+   temp = lis2_read(LIS2_REG_OUT_T);
+
+   printf("LIS2 temp (reg 0x26)= %d\n\r",temp);
+
+   // Set up Single Tap
+   lis2d_write(LIS2_REG_CTRL6, 0x04);
+   lis2d_write(LIS2_REG_TAP_THS_X, 0x0C);
+   lis2d_write(LIS2_REG_TAP_THS_Y, 0xEC);
+   lis2d_write(LIS2_REG_TAP_THS_Z, LIS2_TAP_THSZ_Z_EN | LIS2_TAP_THSZ_Y_EN | LIS2_TAP_THSZ_Z_EN | 0x0C);
+   lis2d_write(LIS2_REG_INT_DUR, 0x06);
+   lis2d_write(LIS2_REG_WAKE_UP_THS, LIS2_WAKE_UP_THS_TAP_EN);
+   lis2d_write(LIS2_REG_CTRL4_INT1_PAD_CTRL, LIS2_CTRL_4_INT1_SINGLE_TAP | LIS2_CTRL_4_INT1_TAP);
+   lis2d_write(LIS2_REG_CTRL7, LIS2_CTRL7_INTS_ENABLE);
+
+
+
+   while(1)
+   {
+       uint8_t status = lis2_read(LIS2_REG_STATUS_DUP);
+       if ( (status & LIS2_STATUS_DUP_SINGLE_TAP) == LIS2_STATUS_DUP_SINGLE_TAP)
+       {
+           printf("Single Tap detected\n\r");
+
+       } else if ( (status & LIS2_STATUS_DUP_DOUBLE_TAP) == LIS2_STATUS_DUP_DOUBLE_TAP)
+       {
+           printf("DOUBLE Tap detected\n\r");
+       }
+   }
 
     while(1)
     {

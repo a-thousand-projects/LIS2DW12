@@ -19,65 +19,65 @@
 /* REGISTER DEFINES */
 
 // Temp Sensor Out
-#define LIS2_REG_OUT_T_L                 0x0d    /r      /Temp Sensor Out
-#define LIS2_REG_OUT_T_H                 0x0e    /r
-#define LIS2_REG_OUT_T                   0x26    /r
+#define LIS2_REG_OUT_T_L                 0x0d    //r      /Temp Sensor Out
+#define LIS2_REG_OUT_T_H                 0x0e    //r
+#define LIS2_REG_OUT_T                   0x26    //r
 
 // Who am I
-#define LIS2_REG_WHO_AM_I                0x0f    /r      /Who am I
+#define LIS2_REG_WHO_AM_I                0x0f    //r      /Who am I
 
 // Control Registers
-#define LIS2_REG_CTRL1                   0x20    /rw
-#define LIS2_REG_CTRL2                   0x21    /rw
-#define LIS2_REG_CTRL3                   0x22    /rw
-#define LIS2_REG_CTRL4_INT1_PAD_CTRL     0x23    /rw
-#define LIS2_REG_CTRL5_INT2_PAD_CTRL     0x24    /rw
-#define LIS2_REG_CTRL6                   0x25    /rw
-#define LIS2_REG_CTRL7                   0x3f    /rw
+#define LIS2_REG_CTRL1                   0x20    //rw
+#define LIS2_REG_CTRL2                   0x21    //rw
+#define LIS2_REG_CTRL3                   0x22    //rw
+#define LIS2_REG_CTRL4_INT1_PAD_CTRL     0x23    //rw
+#define LIS2_REG_CTRL5_INT2_PAD_CTRL     0x24    //rw
+#define LIS2_REG_CTRL6                   0x25    //rw
+#define LIS2_REG_CTRL7                   0x3f    //rw
 
 // Status
-#define LIS2_REG_STATUS                  0x27    /r
+#define LIS2_REG_STATUS                  0x27    //r
 
 // Axis Out
-#define LIS2_REG_OUT_X_L                 0x28    /r
-#define LIS2_REG_OUT_X_H                 0x29    /r
-#define LIS2_REG_OUT_Y_L                 0x2a    /r
-#define LIS2_REG_OUT_Y_H                 0x2b    /r
-#define LIS2_REG_OUT_Z_L                 0x2c    /r
-#define LIS2_REG_OUT_Z_H                 0x2d    /r
+#define LIS2_REG_OUT_X_L                 0x28    //r
+#define LIS2_REG_OUT_X_H                 0x29    //r
+#define LIS2_REG_OUT_Y_L                 0x2a    //r
+#define LIS2_REG_OUT_Y_H                 0x2b    //r
+#define LIS2_REG_OUT_Z_L                 0x2c    //r
+#define LIS2_REG_OUT_Z_H                 0x2d    //r
 
 // FIFO Control
-#define LIS2_REG_FIFO_CTRL               0x2e    /rw
-#define LIS2_REG_FIFO_SAMPLES            0x2f    /r
+#define LIS2_REG_FIFO_CTRL               0x2e    //rw
+#define LIS2_REG_FIFO_SAMPLES            0x2f    //r
 
 // TAP Thresholds
-#define LIS2_REG_TAP_THS_X               0x30    /rw
-#define LIS2_REG_TAP_THS_Y               0x31    /rw
-#define LIS2_REG_TAP_THS_Z               0x32    /rw
-#define LIS2_REG_TAP_SRC                 0x39    /r
+#define LIS2_REG_TAP_THS_X               0x30    //rw
+#define LIS2_REG_TAP_THS_Y               0x31    //rw
+#define LIS2_REG_TAP_THS_Z               0x32    //rw
+#define LIS2_REG_TAP_SRC                 0x39    //r
 
 // Interrupt
-#define LIS2_REG_INT_DUR                 0x33    /rw
-#define LIS2_REG_INT_ALL_SRC             0x3b    /r
+#define LIS2_REG_INT_DUR                 0x33    //rw
+#define LIS2_REG_INT_ALL_SRC             0x3b    //r
 
 
 // Wake Up
-#define LIS2_REG_WAKE_UP_THS             0x34    /rw
-#define LIS2_REG_WAKE_UP_DUR             0x35    /rw
-#define LIS2_REG_WAKE_UP_SRC             0x38    /r
+#define LIS2_REG_WAKE_UP_THS             0x34    //rw
+#define LIS2_REG_WAKE_UP_DUR             0x35    //rw
+#define LIS2_REG_WAKE_UP_SRC             0x38    //r
 
 // Free Fall Config
-#define LIS2_REG_FREE_FALL               0x36    /rw
+#define LIS2_REG_FREE_FALL               0x36    //rw
 
-#define LIS2_REG_STATUS_DUP              0x37    /r
+#define LIS2_REG_STATUS_DUP              0x37    //r
 
 // 6D Source
-#define LIS2_REG_SIXD_SRC                0x3a    /r
+#define LIS2_REG_SIXD_SRC                0x3a    //r
 
 // User Offsets?
-#define LIS2_REG_X_OFS_USR               0x3c    /rw
-#define LIS2_REG_Y_OFS_USR               0x3d    /rw
-#define LIS2_REG_Z_OFS_USR               0x3e    /rw
+#define LIS2_REG_X_OFS_USR               0x3c    //rw
+#define LIS2_REG_Y_OFS_USR               0x3d    //rw
+#define LIS2_REG_Z_OFS_USR               0x3e    //rw
 
 
 /* CONTROL (20h) REGISTER 1
@@ -368,10 +368,10 @@
  */
 
 
-#define  LIS2_TAP_X_EN_POS    0x7
-#define  LIS2_TAP_Y_EN_POS    0x6
-#define  LIS2_TAP_Z_EN_POS    0x5
-#define  LIS2_TAP_THS_Z_POS   0x0
+#define  LIS2_TAP_THSZ_X_EN    1<<7
+#define  LIS2_TAP_THSZ_Y_EN    1<<6
+#define  LIS2_TAP_THSZ_Z_EN    1<<5
+#define  LIS2_TAP_THSZ_POS   0x0
 
 /* --------------------
  * INT DURATION REGISTER
@@ -585,6 +585,14 @@
  * LPASS_ON6D           : Low-pass filter
  */
 
+#define LIS2_CTRL7_DRDY_PULSED          1<<7
+#define LIS2_CTRL7_INT2_ON_INT1         1<<6
+#define LIS2_CTRL7_INTS_ENABLE          1<<5
+#define LIS2_CTRL7_USR_OFF_ON_OUT       1<<4
+#define LIS2_CTRL7_USR_OFF_ON_WAKE_UP   1<<3
+#define LIS2_CTRL7_USR_WEIGHT_OFFSET    1<<2
+#define LIS2_CTRL7_HP_REF_MODE          1<<1
+#define LIS2_CTRL7_LPASS_ON6D           1<<0
 
 
 /* -------------------------------------------------
