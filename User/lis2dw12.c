@@ -15,9 +15,11 @@ void init_lis2dw12()
 
     I2C_InitTypeDef i2c_initStruct;
     GPIO_InitTypeDef GPIO_InitStruct;
+    EXTI_InitTypeDef EXTI_InitStructure = {0};
+    NVIC_InitTypeDef NVIC_InitStructure = {0};
 
     // Initialise the Peripheral clocks
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
 
     // INIT GPIO for SCL
@@ -31,6 +33,28 @@ void init_lis2dw12()
     GPIO_InitStruct.GPIO_Pin = LIS2_SDA_PIN;
     GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(LIS2_SDA_PORT, &GPIO_InitStruct);
+
+    // INIT GPIO for INT1
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPD;
+    GPIO_InitStruct.GPIO_Pin = LIS2_INT_PIN;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(LIS2_INT_PORT, &GPIO_InitStruct);
+
+    // Init Inetrrupt Config
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOD, GPIO_PinSource3);
+    EXTI_InitStructure.EXTI_Line = EXTI_Line3;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+
+    // Init NVIC
+    NVIC_InitStructure.NVIC_IRQChannel = EXTI7_0_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
+    NVIC_Init(&NVIC_InitStructure);
+
 
     // Init SPI
     i2c_initStruct.I2C_ClockSpeed = 100;

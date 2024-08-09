@@ -14,6 +14,8 @@
 #define LIS2_SDA_PIN    GPIO_Pin_1
 #define LIS2_SCL_PORT   GPIOC
 #define LIS2_SDA_PORT   GPIOC
+#define LIS2_INT_PIN    GPIO_Pin_3
+#define LIS2_INT_PORT   GPIOD
 
 
 /* REGISTER DEFINES */

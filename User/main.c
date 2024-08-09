@@ -65,6 +65,16 @@ void USARTx_CFG(void)
     USART_Cmd(USART1, ENABLE);
 }
 
+
+void EXTI7_0_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
+
+void EXTI7_0_IRQHandler(void)
+{
+    EXTI_ClearITPendingBit(EXTI_Line3);     /* Clear Flag */
+    printf("Int Trigger\n\r");
+
+}
+
 /*********************************************************************
  * @fn      main
  *
@@ -104,12 +114,12 @@ int main(void)
 
    // Set up Single Tap
    lis2d_write(LIS2_REG_CTRL6, 0x04);
-   lis2d_write(LIS2_REG_TAP_THS_X, 0x0C);
-   lis2d_write(LIS2_REG_TAP_THS_Y, 0xEC);
-   lis2d_write(LIS2_REG_TAP_THS_Z, LIS2_TAP_THSZ_Z_EN | LIS2_TAP_THSZ_Y_EN | LIS2_TAP_THSZ_Z_EN | 0x0C);
+   lis2d_write(LIS2_REG_TAP_THS_X, 0x09);
+   lis2d_write(LIS2_REG_TAP_THS_Y, 0xE9);
+   lis2d_write(LIS2_REG_TAP_THS_Z, LIS2_TAP_THSZ_Z_EN | LIS2_TAP_THSZ_Y_EN | LIS2_TAP_THSZ_Z_EN | 0x09);
    lis2d_write(LIS2_REG_INT_DUR, 0x06);
-   lis2d_write(LIS2_REG_WAKE_UP_THS, LIS2_WAKE_UP_THS_TAP_EN);
-   lis2d_write(LIS2_REG_CTRL4_INT1_PAD_CTRL, LIS2_CTRL_4_INT1_SINGLE_TAP | LIS2_CTRL_4_INT1_TAP);
+   lis2d_write(LIS2_REG_WAKE_UP_THS, 0);// Single TAP Only //LIS2_WAKE_UP_THS_TAP_EN);
+   lis2d_write(LIS2_REG_CTRL4_INT1_PAD_CTRL, LIS2_CTRL_4_INT1_SINGLE_TAP );
    lis2d_write(LIS2_REG_CTRL7, LIS2_CTRL7_INTS_ENABLE);
 
 
